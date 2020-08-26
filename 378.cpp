@@ -3,7 +3,6 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-#include <set>
 
 struct tpair{
 	int spent, received;
@@ -13,16 +12,6 @@ struct tpair{
 			spent == other.spent && received < other.received;
 	}
 };
-
-inline int minimum(int a, int b)
-{
-	return a < b ? a : b;
-}
-
-inline int maximum(int a, int b)
-{
-	return a < b ? b : a;
-}
 
 void solve(int n)
 {
