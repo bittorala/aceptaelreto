@@ -1,21 +1,47 @@
-// bittorala
-#include <iostream>
-#include <string>
-#include <cctype>
-#include <algorithm>
-using namespace std;
-void caso()
-{
-	string frase = "", frase1 = "", nfrase = "", nfrase1 = "";
-	getline(cin, frase); getline(cin, frase1);
-	for (int i = 0; i < frase.size(); ++i) if (frase[i] != ' ') nfrase += tolower(frase[i]);
-	for (int i = 0; i < frase1.size(); ++i) if (frase1[i] != ' ') nfrase1 += tolower(frase1[i]);
-	sort(nfrase.begin(), nfrase.end()); sort(nfrase1.begin(), nfrase1.end());
-	if (nfrase == nfrase1) cout << "SI\n"; else cout << "NO\n";
-}
+// Bittor
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#define NCHARS 'z'-'a'+1
+
+int count[NCHARS];
+char * buffer;
+
 int main()
 {
-	int ncas = 0; char aux = ' '; cin >> ncas; cin.get(aux);
-	for (int i = 0; i < ncas; ++i) caso();
+	int ncases;
+	int n;
+	char c;
+	size_t size;
+	for (scanf("%d", &ncases), getchar_unlocked(); ncases; ncases--)
+	{
+		for (int i = 0; i < NCHARS; ++i) count[i] = 0;
+		n = getline(&buffer, &size, stdin);
+		for (int i = 0; i < n; ++i)
+		{
+			c = buffer[i];
+			if (!isalpha(c)) continue;
+			c = tolower(c);
+			if (c-'a' < 0 || c-'a'>= NCHARS) continue;
+			++count[c-'a'];	
+		}
+		n = getline(&buffer,&size,stdin);
+		for (int i = 0; i < n; ++i)
+		{
+			c = buffer[i];
+			if (!isalpha(c)) continue;
+			c = tolower(c);
+			if (c-'a' < 0 || c-'a'>= NCHARS) continue;
+			--count[c-'a'];	
+		}
+		bool anagram = true;
+		for (int i = 0; i < NCHARS && anagram; ++i)
+			if (count[i]) anagram = false;
+		anagram ? puts("SI") : puts("NO");
+	}
 	return 0;
 }
+
+
+
+
