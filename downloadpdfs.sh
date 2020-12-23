@@ -1,4 +1,4 @@
-for file in *.cpp
+for file in *.c*
 do
 	NUMBER=$(echo $file | sed 's/[^0-9]*//g')
 	if test -e $NUMBER.pdf; then continue; fi
